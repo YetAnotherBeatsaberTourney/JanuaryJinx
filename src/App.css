@@ -33,8 +33,7 @@ body {
 .BGImage {
   width: 1920px;
   height: 1080px;
-  /*background: url("../public/images/Background.png");*/
-  background: black;
+  background: url("../public/images/Background.svg");
   background-repeat: no-repeat;
   opacity: 1;
   position: absolute;

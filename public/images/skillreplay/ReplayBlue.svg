@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="480" height="547" viewBox="0 0 480 547">
+  <g id="c" data-name="Layer 1">
+    <g>
+      <polygon points="0 403 144 259 144 403 0 403" fill="#0035aa"/>
+      <rect x="144" y="336" width="192" height="144" fill="#0053e5"/>
+      <polygon points="0 403 144 547 144 403 0 403" fill="#0035aa"/>
+      <polygon points="336 480 480 336 336 336 336 480" fill="#0037d3"/>
+      <rect x="336" y="144" width="144" height="192" fill="#0053e5"/>
+      <polygon points="480 144 336 0 336 144 480 144" fill="#0037d3"/>
+      <rect x="144" y="0" width="192" height="144" fill="#0053e5"/>
+      <polygon points="144 0 0 144 144 144 144 0" fill="#0037d3"/>
+    </g>
+  </g>
+</svg>
