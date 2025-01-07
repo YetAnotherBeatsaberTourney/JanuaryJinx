@@ -240,45 +240,43 @@ function App() {
   return (
     <body className="BGImage">
       <div className="MainClass">
+        {/*Top Bar*/}
         <div className="PlayerContainers" id="PlayerContainers">
-          <div className="Player1Container" id="Player1Container">
-            <p className="Player1Name" id="Player1Name">OK</p>
-            <button className="Player1SkipBase" id="Player1SkipBase"
-              onClick={(e) => handleButton(0, "skip")}></button>
-            <button className="Player1ReplayBase" id="Player1ReplayBase"
-              onClick={(e) => handleButton(0, "replay")}></button>
-            {/*This can be done SO much better its actually insane*/}
-            <button className="Scores" id="ScoresLeft"
-                    onClick={() => userWinScore(0)}>
-              <div className="Player1Score" id="Player1Score3"></div>
-              <div className="Player1Score" id="Player1Score2"></div>
-              <div className="Player1Score" id="Player1Score1"></div>
-              <div className="Player1Score" id="Player1Score0"></div>
-            </button>
-            <div className="imageContainer1" id="imageContainer1">
-              <img src="../public/images/Placeholder.png" className="Player1Image" id="Player1Image" />
+          <div className="imageContainer" id="imageContainer">
+            <img src="\images\Placeholder1.png" className="Player1Image" id="Player1Image" />
+            <img src="\images\Placeholder2.png" className="Player2Image" id="Player2Image" />
+          </div>
+          {/*Player scores*/}
+          <div className="PlayerBounds ScoringShadow FadeIn" id="PlayerBounds">
+            <div className="Player1Class" id="Player1Class">
+              <p className="Player1FC" id="Player1FC">FC</p>
+              <p className="Player1Combo" id="Player1Combo">0x</p>
+              <p className="Player1ACC" id="Player1ACC">0.00%</p>
+            </div>
+            <div className="Player2Class" id="Player2Class">
+              <p className="Player2FC" id="Player2FC">FC</p>
+              <p className="Player2Combo" id="Player2Combo">0x</p>
+              <p className="Player2ACC" id="Player2ACC">0.00%</p>
             </div>
           </div>
-          <div className="LogoSpot" id="LogoContainer">
-          </div>
-          <div className="Player2Container" id="Player2Container">
-            <div className="imageContainer2" id="imageContainer2">
-              <img src="../public/images/Placeholder.png" className="Player2Image" id="Player2Image" />
+          <div className="SongCard FadeIn" id="SongCard">
+            <div className="SongBox">
+              <p className="SongName" id="SongName">Really Long Song name that is...</p>
+              <div className="SongInfoLeft">
+                <p className="SongMapper" id="SongMapper">Mapped by NightHawk</p>
+                <p className="UploadDate" id="UploadDate">Uploaded on 2021-09-01</p>
+              </div>
+              <div className="SongInfoRight">
+                <p className="SongArtist" id="SongArtist">Lauv</p>
+                <p className="SongLength" id="SongLength">3:59</p>
+              </div>
+              <p className="DiffName" id="DiffName">ABC</p>
+              <div className="SongCover" id="SongCover"></div>
+              <div className="SongBoxBG" id="SongBoxBG"></div>
             </div>
-            <button className="Scores" id="ScoresRight"
-                    onClick={() => userWinScore(1)}>
-              <div className="Player2Score" id="Player2Score0"></div>
-              <div className="Player2Score" id="Player2Score1"></div>
-              <div className="Player2Score" id="Player2Score2"></div>
-              <div className="Player2Score" id="Player2Score3"></div>
-            </button>
-            <button className="Player2SkipBase" id="Player2SkipBase"
-              onClick={(e) => handleButton(1, "skip")}></button>
-            <button className="Player2ReplayBase" id="Player2ReplayBase"
-              onClick={(e) => handleButton(1, "replay")}></button>
-            <p className="Player2Name" id="Player2Name">BOOMER</p>
-          </div>
-          <div className="divLine" id="divLine"></div>
+        </div>
+        </div>
+        {/*Song Card*/}
 
           {/* control button(s) */}
           <button
@@ -318,29 +316,11 @@ function App() {
             console.log("Mute button pressed");
             window.switchAudio();
           }}></button>
-
-        </div>
-
         {/* Streams */}
         <div className="videoContainer">
           <div id="player1Video"></div>
           <div id="player2Video"></div>
         </div>
-
-        {/*Player scores*/}
-        <div className="PlayerBounds ScoringShadow FadeIn" id="PlayerBounds">
-          <div className="Player1Class" id="Player1Class">
-            <p className="Player1ACC" id="Player1ACC">0.00%</p>
-            <p className="Player1FC" id="Player1FC">FC</p>
-            <p className="Player1Combo" id="Player1Combo">0x</p>
-          </div>
-          <div className="Player2Class" id="Player2Class">
-            <p className="Player2ACC" id="Player2ACC">0.00%</p>
-            <p className="Player2FC" id="Player2FC">FC</p>
-            <p className="Player2Combo" id="Player2Combo">0x</p>
-          </div>
-        </div>
-
         {/*Tug of War*/}
         <div className="TugOfWar FadeIn" id="TugOfWar">
           <div className="LeftTugOuter">
@@ -350,25 +330,17 @@ function App() {
             <div className="RightTugInner SmoothWidth" id="RightTug"></div>
           </div>
         </div>
-
-        <div id="Song">
-          <div className="SongCard FadeIn" id="SongCard">
-            <div className="SongBox">
-              <p className="SongName" id="SongName">Really Long Song name that is...</p>
-              <div className="SongInfoLeft">
-                <p className="SongMapper" id="SongMapper">Mapped by NightHawk</p>
-                <p className="UploadDate" id="UploadDate">Uploaded on 2021-09-01</p>
-              </div>
-              <div className="SongInfoRight">
-                <p className="SongArtist" id="SongArtist">Lauv</p>
-                <p className="SongLength" id="SongLength">3:59</p>
-              </div>
-              <p className="DiffName" id="DiffName">ABC</p>
-              <div className="SongCover" id="SongCover"></div>
-              <div className="SongBoxBG" id="SongBoxBG"></div>
-            </div>
-          </div>
         </div>
+        {/*Player Names and Score Counter*/ }
+        <div className="PlayerScores" id="PlayerScores">
+          <div className="Player1Container" id="Player1Container">
+            <p className="Player1Name" id="Player1Name">OK</p>
+            <div className="Player1Score">1</div>
+          </div>
+          <div className="Player2Container" id="Player2Container">
+            <p className="Player2Name" id="Player2Name">OK 2</p>
+            <div className="Player2Score">2</div>
+          </div>
       </div>
     </body>
   );
