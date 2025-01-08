@@ -13,6 +13,10 @@ import { setOverlay } from './js/OverlayHandlers.js';
 import { Tournament, Match, User_ClientTypes } from 'moons-ta-client';
 import { useTAClient } from './useTAClient';
 
+//Replay Arrows
+import { ReactComponent as BlueArrow } from '/images/skillreplay/ReplayBlue.svg';
+import { ReactComponent as RedArrow } from '/images/skillreplay/ReplayBlue.svg';
+
 // Ensure Twitch is available globally
 declare global {
   interface Window {
@@ -238,27 +242,36 @@ function App() {
   }, []);
 
   return (
+
     <body className="BGImage">
       <div className="MainClass">
         {/*Top Bar*/}
         <div className="PlayerContainers" id="PlayerContainers">
           <div className="imageContainer" id="imageContainer">
-            <img src="\images\Placeholder1.png" className="Player1Image" id="Player1Image" />
-            <img src="\images\Placeholder2.png" className="Player2Image" id="Player2Image" />
+            <img src="/images/Placeholder1.png" className="Player1Image" id="Player1Image" />
+            <img src="/images/Placeholder2.png" className="Player2Image" id="Player2Image" />
           </div>
-          {/*Player scores*/}
-          <div className="PlayerBounds ScoringShadow FadeIn" id="PlayerBounds">
-            <div className="Player1Class" id="Player1Class">
-              <p className="Player1FC" id="Player1FC">FC</p>
-              <p className="Player1Combo" id="Player1Combo">0x</p>
-              <p className="Player1ACC" id="Player1ACC">0.00%</p>
+          <div className="StatsContainer">
+            <img src="/images/skillreplay/ReplayBlue.svg" className="Replay ReplayBlue" />
+            {/* Player 1 */}
+            <div className="PlayerStats">
+              <div className="TopRow1">
+                <span className="FC">2X</span>
+                <span className="Combo">2817x</span>
+              </div>
+              <span className="ACC">95.83%</span>
             </div>
-            <div className="Player2Class" id="Player2Class">
-              <p className="Player2FC" id="Player2FC">FC</p>
-              <p className="Player2Combo" id="Player2Combo">0x</p>
-              <p className="Player2ACC" id="Player2ACC">0.00%</p>
+            {/* Player 2 */}
+            <div className="PlayerStats">
+              <div className="TopRow2">
+                <span className="FC">FC</span>
+                <span className="Combo">2819x</span>
+              </div>
+              <span className="ACC">98.51%</span>
             </div>
+            <img src="/images/skillreplay/ReplayRed.svg" className="Replay ReplayRed"/>
           </div>
+          {/*Song Card*/}
           <div className="SongCard FadeIn" id="SongCard">
             <div className="SongBox">
               <p className="SongName" id="SongName">Really Long Song name that is...</p>
@@ -275,9 +288,16 @@ function App() {
               <div className="SongBoxBG" id="SongBoxBG"></div>
             </div>
         </div>
+      </div>
+      {/*Tug of War*/}
+      <div className="TugOfWar FadeIn" id="TugOfWar">
+        <div className="LeftTugOuter">
+          <div className="LeftTugInner SmoothWidth" id="LeftTug"></div>
         </div>
-        {/*Song Card*/}
-
+        <div className="RightTugOuter">
+          <div className="RightTugInner SmoothWidth" id="RightTug"></div>
+        </div>
+      </div>
           {/* control button(s) */}
           <button
             className={"chooseMatch"}
@@ -321,16 +341,7 @@ function App() {
           <div id="player1Video"></div>
           <div id="player2Video"></div>
         </div>
-        {/*Tug of War*/}
-        <div className="TugOfWar FadeIn" id="TugOfWar">
-          <div className="LeftTugOuter">
-            <div className="LeftTugInner SmoothWidth" id="LeftTug"></div>
-          </div>
-          <div className="RightTugOuter">
-            <div className="RightTugInner SmoothWidth" id="RightTug"></div>
-          </div>
-        </div>
-        </div>
+
         {/*Player Names and Score Counter*/ }
         <div className="PlayerScores" id="PlayerScores">
           <div className="Player1Container" id="Player1Container">
@@ -341,6 +352,7 @@ function App() {
             <p className="Player2Name" id="Player2Name">OK 2</p>
             <div className="Player2Score">2</div>
           </div>
+        </div>
       </div>
     </body>
   );

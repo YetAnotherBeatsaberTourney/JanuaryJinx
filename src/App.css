@@ -1,29 +1,16 @@
-/*@import url('./Font/RubikNorm.ttf');*/
-/*@import url('./Font/Rubik-Bold.ttf');*/
-/*@import url('./Font/Leixo.ttf');*/
-
+@import url('https://use.typekit.net/bai6ujt.css');
 :root
 {
   --skip-replay: "../public/images/skillreplay/";
 }
 
 @font-face {
-  font-family: 'Rubik';
-  src: url('./Font/RubikNorm.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Rubik-Bold';
-  src: url('./Font/Rubik-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Leixo';
-  src: url('./Font/Leixo.ttf') format('truetype');
+  font-family: 'industry-inc-stencil';
+  src: url('https://use.typekit.net/bai6ujt.css') format('truetype');
 }
 
 body {
-  font-family: Rubik, sans-serif;
+  font-family: "industry-inc-stencil", sans-serif;
   overflow: hidden;
   margin: 0;
   padding: 0;
@@ -112,7 +99,7 @@ body {
 /* PlayerContainers */
 
 .PlayerContainers {
-  font-family: Rubik, sans-serif;
+  font-family: 'industry-inc-stencil', sans-serif;
   position: absolute;
   top: 0;
   height: 172px;
@@ -129,26 +116,6 @@ body {
   position: relative;
   right: 0;
   width: 20%;
-}
-
-.Logo
-{
-  width: 100%;
-  height: 100%;
-}
-
-.Player1Container, .Player2Container {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  margin-top: 16px;
-}
-
-.Player1Container {
-  right: 53%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .Player1Image {
@@ -171,20 +138,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 16ch;
-}
-
-#ScoresLeft {
-  gap: 10px;
-  position: absolute;
-  top: 36px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  right: 129px;
-  background: transparent;
-  border: transparent;
 }
 
 .Player1Score {
@@ -224,7 +177,6 @@ body {
 }
 
 .Player2Goal {
-  opacity: 1;
   padding-left: 13px;
   padding-right: 13px;
   background: #4D5386;
@@ -237,20 +189,6 @@ body {
   z-index: 3;
   border-radius: 0 8px 0 0;
   white-space: nowrap;
-}
-
-#ScoresRight {
-  gap: 10px;
-  position: absolute;
-  top: 36px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 126px;
-  background: transparent;
-  border: transparent;
 }
 
 .Player2Score {
@@ -332,10 +270,10 @@ body {
 
 .videoContainer {
   display: flex;
-  width: 100%;
+  width: 88%;
   height: 67%;
   position: absolute;
-  top: 16%;
+  top: 16.5%;
   justify-content: center;
   align-items: center;
   overflow: hidden;
@@ -369,77 +307,74 @@ body {
   gap: 43px;
 }
 
-.Player1Class {
+.StatsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+}
+
+.PlayerStats {
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-self: center;
   color: white;
-  width: 200px;
 }
 
-.Player1FC {
-  line-height: 0px;
-  margin: 0px;
-  padding-bottom: 36px;
-  font-size: 32px;
-  font-weight: 900;
-}
-
-.Player1ACC {
-  line-height: 0px;
-  margin: 0px;
-  padding-bottom: 47px;
-  font-size: 48px;
-  font-weight: 900;
-}
-
-.Player1Combo {
-  line-height: 0px;
-  margin: 0px;
-  font-size: 32px;
-  font-weight: 900;
-}
-
-.Player2Class {
+.TopRow1 {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  align-self: center;
+  align-items: flex-end;
+}
+
+.TopRow2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.FC {
+  font-size: 32px;
+  font-weight: 900;
   color: white;
-  width: 200px;
 }
 
-.Player2FC {
-  line-height: 0px;
-  margin: 0px;
-  padding-bottom: 36px;
+.Combo {
   font-size: 32px;
   font-weight: 900;
+  color: white;
 }
 
-.Player2ACC {
-  line-height: 0px;
-  margin: 0px;
-  padding-bottom: 47px;
-  font-size: 48px;
-  font-weight: 900;
-}
-
-.Player2Combo {
-  line-height: 0px;
-  margin: 0px;
+.ACC {
   font-size: 32px;
   font-weight: 900;
+  color: white;
 }
 
+.Replay {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform: scale(3);
+  bottom: 100px;
+}
+/* TODO Specific Replay class maybe */
+.ReplayBlue {
+  left: 1035.5px;
+}
+
+.ReplayRed {
+  left: 743.5px;
+}
 /* Tug Of War */
 
 .TugOfWar {
   display: flex;
   opacity: 1;
   position: absolute;
-  bottom: 176px;
+  bottom: 900px;
+  width: 88%;
 }
 
 .LeftTugOuter {
@@ -471,16 +406,18 @@ body {
 #PlayerScores {
   position: absolute;
   height: 17%;
-  width: 100%;
+  width: 88%;
   bottom: 0;
-  font-family: Rubik-Bold, sans-serif;
+  font-family: 'industry-inc-stencil', sans-serif;
 }
 
 .SongCard {
-  height: 150px;
-  width: 700px;
-  max-height: 150px;
-  max-width: 550px;
+  background: url("/public/images/Songcards/Normal/ExpertBG.png");
+
+  height: 136px;
+  width: 503px;
+  max-height: 136px;
+  max-width: 503px;
   opacity: 1;
   display: flex;
   bottom: 20px;
@@ -509,8 +446,8 @@ body {
   position: absolute;
   right: -65px;
   background: url('https://eu.cdn.beatsaver.com/cfcdbd060aabc0673f4950506b5170ce59d963bc.jpg') 50% 50% / cover;
-  min-width: 153px;
-  min-height: 156px;
+  min-width: 128px;
+  min-height: 128px;
   border-radius: 15px;
   opacity: 1;
   transition: all 0.5s ease;
