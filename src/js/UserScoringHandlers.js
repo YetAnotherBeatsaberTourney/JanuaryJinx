@@ -3,11 +3,14 @@ import {User_ClientTypes} from "moons-ta-client";
 import {setOverlay} from "./OverlayHandlers";
 
 export let playerScore = [0, 0];
+export let playerMisses = [0, 0];
+export let playerFC = [true, true]
 export let playerAcc = [0.0, 0.0];
 export let playerCombo = [0, 0];
 export let playerWinScore = [0, 0];
-let playerHadSkip = [false, false];
 let playerHadReplay = [false, false];
+let playerReplayScores = [0, 0]; //Array for Replay Accuracy
+
 function scoreUpdate(player, score, combo, acc, misses, reset, songPosition) {
 	if (playerIDs[0] === player) {
 		updatePlayerData(0, score, combo, acc, misses);
@@ -24,39 +27,48 @@ function updatePlayerData(index, score, combo, acc, misses) {
 	playerAcc[index] = (acc * 100).toFixed(2);
 	playerCombo[index] = combo;
 	playerScore[index] = score;
-	// playerMisses[index] = misses;
+	playerMisses[index] = misses;
 
 	updateTug();
 
-	document.getElementById(`Player${index + 1}Combo`).innerHTML = playerCombo[index] + "x";
-	document.getElementById(`Player${index + 1}ACC`).innerHTML = playerAcc[index] + "%";
-	document.getElementById(`Player${index + 1}FC`).innerHTML = playerScore[index];
+	document.getElementById(`Player${index + 1}Combo`).textContent = playerCombo[index] + "x";
+	document.getElementById(`Player${index + 1}ACC`).textContent = playerAcc[index] + "%";
+	document.getElementById(`Player${index + 1}FC`).textContent = playerScore[index];
 
-	// if (misses >= 1) {
-	// 	document.getElementById(`Player${index + 1}FC`).style.color = "#d15252";
-	// 	document.getElementById(`Player${index + 1}FC`).innerHTML = playerMisses[index] + "x";
-	// 	playerFC[index] = false;
-	// } else {
-	// 	playerFC[index] = true;
-	// 	document.getElementById(`Player${index + 1}FC`).style.color = "#ffffff";
-	// 	document.getElementById(`Player${index + 1}FC`).innerHTML = "FC";
-	// }
+	if (playerHadReplay[index]) {
+		playerReplayScores[index] = playerAcc[index];
+		document.getElementById(`Player${index + 1}ReplayScore`).textContent = playerReplayScores[index] + "%";
+	};
+
+	if (misses >= 1) {
+		document.getElementById(`Player${index + 1}FC`).style.color = "#d15252";
+		document.getElementById(`Player${index + 1}FC`).textContent = playerMisses[index] + "x";
+		playerFC[index] = false;
+	} else {
+		playerFC[index] = true;
+		document.getElementById(`Player${index + 1}FC`).style.color = "#ffffff";
+		document.getElementById(`Player${index + 1}FC`).textContent = "FC";
+	}
 }
 function resetAllPlayers() {
-	// playerFC = [true, true];
+	playerFC = [true, true];
 	playerScore = [0, 0];
 	playerAcc = [0, 0];
 	playerCombo = [0, 0];
 	playerWinScore = [0, 0];
-	// playerMisses = [0, 0];
+	playerMisses = [0, 0];
+	playerReplayScores = [0, 0];
+	playerHadReplay = [false, false];
 
 	updateTug();
 
 	for (let i = 0; i < 2; i++) {
-		// document.getElementById(`Player${i + 1}FC`).style.color = "#ffffff";
-		// document.getElementById(`Player${i + 1}FC`).innerHTML = "FC";
-		document.getElementById(`Player${i + 1}Combo`).innerHTML = "0x";
-		document.getElementById(`Player${i + 1}ACC`).innerHTML = "0.00%";
+		document.getElementById(`Player${i + 1}FC`).style.color = "#ffffff";
+		document.getElementById(`Player${i + 1}FC`).textContent = "FC";
+		document.getElementById(`Player${i + 1}Combo`).textContent = "0x";
+		document.getElementById(`Player${i + 1}ACC`).textContent = "0.00%";
+		document.getElementById(`Player${i + 1}ReplayScore`).textContent = "0.00%"
+		//document.getElementById(`Player${i + 1}ReplayScore`).style.opacity = 0; //Hide ReplayAcc by default
 	}
 }
 
@@ -82,20 +94,14 @@ function updateTug() {
 	if (diff < 0) {
 		rightTug.style.width = "0%";
 		leftTug.style.width = `${percentage}%`;
-		document.getElementById(`Player1ACC`).style.fontSize = ((1+(Math.abs(diff)/400)) * 47) + "px";
-		document.getElementById(`Player2ACC`).style.fontSize = ((1-(0.1-diff/800)) * 47) + "px";
 		return;
 	} else if (diff > 0) {
 		leftTug.style.width = "0%";
 		rightTug.style.width = `${percentage}%`;
-		document.getElementById(`Player1ACC`).style.fontSize = ((1-(0.1-diff/800)) * 47) + "px";
-		document.getElementById(`Player2ACC`).style.fontSize = ((1+(Math.abs(diff)/400)) * 47) + "px";
 		return;
 	} else {
 		leftTug.style.width = "0%"
 		rightTug.style.width = "0%";
-		document.getElementById(`Player1ACC`).style.fontSize = 47 + "px";
-		document.getElementById(`Player2ACC`).style.fontSize = 47 + "px";
 		return;
 	}
 }
@@ -103,95 +109,21 @@ function updateTug() {
 function updateScores(user, score)
 {
 	let scoreCountElement = [[], []]; // Initialize with empty arrays
-	let backgroundColour = ["#f6d16a", "#d91e36"];
-	for(let i = 0; i < 4; i++)
-	{
-		scoreCountElement[0][i] = document.getElementById(`Player1Score${i}`);
-		scoreCountElement[1][i] = document.getElementById(`Player2Score${i}`);
-	}
-	if(score === 0)
-	{
-		scoreCountElement[user][0].style.background = "transparent";
-		scoreCountElement[user][1].style.background = "transparent";
-		scoreCountElement[user][2].style.background = "transparent";
-		scoreCountElement[user][3].style.background = "transparent";
-	}
-	else if(score === 1)
-	{
-		scoreCountElement[user][0].style.background = backgroundColour[user];
-		scoreCountElement[user][1].style.background = "transparent";
-		scoreCountElement[user][2].style.background = "transparent";
-		scoreCountElement[user][3].style.background = "transparent";
-	}
-	else if(score === 2)
-	{
-		scoreCountElement[user][0].style.background = backgroundColour[user];
-		scoreCountElement[user][1].style.background = backgroundColour[user];
-		scoreCountElement[user][2].style.background = "transparent";
-		scoreCountElement[user][3].style.background = "transparent";
-	}
-	else if(score === 3)
-	{
-		scoreCountElement[user][0].style.background = backgroundColour[user];
-		scoreCountElement[user][1].style.background = backgroundColour[user];
-		scoreCountElement[user][2].style.background = backgroundColour[user];
-		scoreCountElement[user][3].style.background = "transparent";
-	}
-	else if(score === 4)
-	{
-		scoreCountElement[user][0].style.background = backgroundColour[user];
-		scoreCountElement[user][1].style.background = backgroundColour[user];
-		scoreCountElement[user][2].style.background = backgroundColour[user];
-		scoreCountElement[user][3].style.background = backgroundColour[user];
-	}
-	else
-	{
-		console.error("Invalid score value");
-	}
+		scoreCountElement[0] = document.getElementById("Player1Score");
+		scoreCountElement[1] = document.getElementById("Player2Score");
 }
 
 function userWinScore(player)
 {
 	playerWinScore[player] += 1;
 	updateScores(player, playerWinScore[player]);
-	// if(playerIDs[0] === player) {
-	// 	playerWinScore[0] += 1;
-	// 	updateScores(0, playerWinScore[0]);
-	// } else if(playerIDs[1] === player) {
-	// 	playerWinScore[1] += 1;
-	// 	updateScores(1, playerWinScore[1]);
-	// } else {
-	// 	console.error("Invalid player ID");
-	// }
-}
-
-function handleSkip(player)
-{
-	let playerSkip = [null, null];
-	playerSkip[0] = document.getElementById("Player1SkipBase");
-	playerSkip[1] = document.getElementById("Player2SkipBase");
-	if(player === 0)
-	{
-		if(playerHadSkip[0] === true) {
-			playerSkip[0].style.background = `url(${window.location.origin}/images/skillreplay/L_YesSkip.svg`;
-			playerHadSkip[0] = false;
-		} else {
-			playerSkip[0].style.background = `url(${window.location.origin}/images/skillreplay/L_NoSkip.svg`;
-			playerHadSkip[0] = true;
-		}
-	}
-	else if(player === 1)
-	{
-		if(playerHadSkip[1] === true) {
-			playerSkip[1].style.background = `url(${window.location.origin}/images/skillreplay/R_YesSkip.svg`;
-			playerHadSkip[1] = false;
-		} else {
-			playerSkip[1].style.background = `url(${window.location.origin}/images/skillreplay/R_NoSkip.svg`;
-			playerHadSkip[1] = true;
-		}
-	}
-	else
-	{
+	if(playerIDs[0] === player) {
+		playerWinScore[0] += 1;
+		updateScores(0, playerWinScore[0]);
+	} else if(playerIDs[1] === player) {
+	playerWinScore[1] += 1;
+	updateScores(1, playerWinScore[1]);
+	} else {
 		console.error("Invalid player ID");
 	}
 }
@@ -201,37 +133,50 @@ function handleReplay(player)
 	let playerReplay = [null, null];
 	playerReplay[0] = document.getElementById("Player1ReplayBase");
 	playerReplay[1] = document.getElementById("Player2ReplayBase");
-	if(player === 0)
-	{
-		if(playerHadReplay[0] === true)
-		{
-			playerReplay[0].style.background = `url(${window.location.origin}/images/skillreplay/L_NoReplay.svg)`;
+	if(player === 0) {
+		if(playerHadReplay[0] === true) {
+			playerReplay[0].style.opacity = 0;
 			userWinScore(1);
 			playerHadReplay[0] = false;
+			document.getElementById("Player1ReplayScore").textContent = playerReplayScores[0] + "%";
+			document.getElementById("Player2ReplayScore").textContent = playerReplayScores[0] + "%";
+			document.getElementById("Player1ReplayScore").style.opacity = 1;
+			document.getElementById("Player2ReplayScore").style.opacity = 1;
 		} else {
-			playerReplay[0].style.background = `url(${window.location.origin}/images/skillreplay/L_YesReplay.svg)`;
+			playerReplay[0].style.opacity = 1;
+			playerHadReplay[0] = true;
+			playerReplayScores[0] = playerAcc[0];
+			document.getElementById("Player1ReplayScore").textContent = "0.00%";
+			document.getElementById("Player2ReplayScore").textContent = "0.00%";
+			document.getElementById("Player1ReplayScore").style.opacity = 0;
+			document.getElementById("Player2ReplayScore").style.opacity = 0;
 			if (playerWinScore !== null) {
 				playerWinScore[1] -= 1;
 				if(playerWinScore[1] < 0) playerWinScore[1] = 0;
 				updateScores(1, playerWinScore[1]);
-				playerHadReplay[0] = true;
 			}
 		}
 	}
-	else if(player === 1)
-	{
-		if(playerHadReplay[1] === true)
-		{
-			playerReplay[1].style.background = `url(${window.location.origin}/images/skillreplay/R_NoReplay.svg)`;
-			// userWinScore(0);
+	else if(player === 1) {
+		if(playerHadReplay[1] === true) {
+			playerReplay[1].style.opacity = 1;
+			userWinScore(0);
 			playerHadReplay[1] = false;
+			document.getElementById("Player2ReplayScore").textContent = playerReplayScores[1] + "%";
+			document.getElementById("Player1ReplayScore").textContent = playerReplayScores[1] + "%";
+			document.getElementById("Player1ReplayScore").style.opacity = 1;
+			document.getElementById("Player2ReplayScore").style.opacity = 1;
 		} else {
-			playerReplay[1].style.background = `url(${window.location.origin}/images/skillreplay/R_YesReplay.svg)`;
+			playerReplay[1].style.opacity = 0;
+			playerHadReplay[1] = true;
+			document.getElementById("Player1ReplayScore").textContent = "0.00%";
+			document.getElementById("Player2ReplayScore").textContent = "0.00%";
+			document.getElementById("Player1ReplayScore").style.opacity = 0;
+			document.getElementById("Player2ReplayScore").style.opacity = 0;
 			if (playerWinScore !== null) {
 				playerWinScore[0] -= 1;
 				if(playerWinScore[0] < 0) playerWinScore[0] = 0;
 				updateScores(0, playerWinScore[0]);
-				playerHadReplay[1] = true;
 			}
 		}
 	}
@@ -240,4 +185,4 @@ function handleReplay(player)
 	}
 }
 
-export { scoreUpdate, updatePlayerData, resetAllPlayers, updateTug, userWinScore, handleSkip, handleReplay };
+export { scoreUpdate, updatePlayerData, resetAllPlayers, updateTug, userWinScore, handleReplay };

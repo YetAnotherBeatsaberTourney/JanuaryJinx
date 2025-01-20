@@ -1,16 +1,16 @@
 async function getImage(platformID) {
     try {
-        const response = await fetch(`http://api.beatkhana.com/api/getUserByBeatleader/${platformID}`);
+        const response = await fetch(`http://api.beatkhana.com/api/users/${platformID}`);
         if (!response.ok) {
-            // new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();
-        if (Array.isArray(data) && data.length > 0) {
-            console.log(data[0]);
-            return data[0].avatarurl;
-        } else {
-            // new Error("Invalid response structure");
+        const text = await response.text();
+        if (!text) {
+            new Error("Empty response body");
+            return "https://static-cdn.jtvnw.net/jtv_user_pictures/b699fe0a-2e0a-48d6-b479-b7ff4e65950a-profile_image-70x70.png"; // Fallback image
         }
+        const data = JSON.parse(text);
+        return data.avatarUrl;
     } catch (error) {
         console.error("Failed to fetch image:", error);
         return "https://static-cdn.jtvnw.net/jtv_user_pictures/b699fe0a-2e0a-48d6-b479-b7ff4e65950a-profile_image-70x70.png"; // Fallback image
@@ -19,7 +19,7 @@ async function getImage(platformID) {
 
 async function getTwitchID(platformID)
 {
-    const response = await fetch(`http://api.beatkhana.com/api/getUserByBeatleader/${platformID}`);
+    const response = await fetch(`http://api.beatkhana.com/api/users/${platformID}`);
     if (!response.ok) {
         new Error(`HTTP error! status: ${response.status}`);
     }
@@ -28,8 +28,8 @@ async function getTwitchID(platformID)
         new Error("Empty response body");
         return "yetanotherbt"; // Fallback twitch name
     }
-    const data = JSON.parse(text);
-    return data[0].twitchname;
+    const data = JSON.parse(text);    
+    return data.twitchName || "yetanotherbt";
 }
 
 async function setOverlay(playerIDs, playerNames, platformIDs) {
@@ -51,24 +51,6 @@ async function setOverlay(playerIDs, playerNames, platformIDs) {
 
         player1NameElement.innerText = playerNames[0];
         player1NameElement.style.opacity = '1';
-
-        let playerImage = [];
-        playerImage[0] = await getImage(platformIDs[0]);
-        playerImage[1] = await getImage(platformIDs[1]);
-
-        // set player images
-        if(!platformIDs[0] || !playerImage[0]){
-            console.error("Invalid platform ID:", platformIDs[0]);
-            player1ImageElement.src = "https://static-cdn.jtvnw.net/jtv_user_pictures/b699fe0a-2e0a-48d6-b479-b7ff4e65950a-profile_image-70x70.png"; // Fallback image
-        } else {
-            player1ImageElement.src = playerImage[0];
-        }
-        if(!platformIDs[1] || !playerImage[1]){
-            console.error("Invalid platform ID:", platformIDs[1]);
-            player2ImageElement.src = "https://static-cdn.jtvnw.net/jtv_user_pictures/b699fe0a-2e0a-48d6-b479-b7ff4e65950a-profile_image-70x70.png"; // Fallback image
-        } else {
-            player2ImageElement.src = playerImage[1];
-        }
 
         player2NameElement.innerText = playerNames[1];
         player2NameElement.style.opacity = '1';

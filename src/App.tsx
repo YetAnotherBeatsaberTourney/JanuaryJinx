@@ -5,17 +5,13 @@ import './App.css';
 import { setPlayerInfo } from './js/MainHandlers.js';
 import './js/FormatHandlers.js';
 import { getMap } from './js/MapHandlers.js';
-import { resetAllPlayers, scoreUpdate, userWinScore, handleSkip, handleReplay } from "./js/UserScoringHandlers";
+import { resetAllPlayers, scoreUpdate, userWinScore, handleReplay, playerWinScore } from "./js/UserScoringHandlers";
 
 import { setOverlay } from './js/OverlayHandlers.js';
 
 // TA client thingy
 import { Tournament, Match, User_ClientTypes } from 'moons-ta-client';
 import { useTAClient } from './useTAClient';
-
-//Replay Arrows
-import { ReactComponent as BlueArrow } from '/images/skillreplay/ReplayBlue.svg';
-import { ReactComponent as RedArrow } from '/images/skillreplay/ReplayBlue.svg';
 
 // Ensure Twitch is available globally
 declare global {
@@ -30,15 +26,9 @@ let currentMatch: Match;
 
 function App() {
   const handleButton = (player: any, action: any) => {
-    if (action === "skip") {
-      console.log("Player " + player + " skipped");
-      handleSkip(player);
-    }
-    else {
-      console.log("Player " + player + " replayed");
-      handleReplay(player);
-    }
-  };
+    console.log("Player " + player + " replayed");
+    handleReplay(player);
+  }
 
   let taHook = useTAClient();
   let [selectableMatches, setSelectableMatches] = useState<[string, Match][]>();
@@ -57,10 +47,10 @@ function App() {
   }
   async function addSelfToMatch(playerName: string | undefined, matchID: string | undefined) {
     console.log("Add self to match");
-    const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "rst2024");
+    const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT Test Tourney");
 
     if (!myTourney) {
-      console.error(`Could not find tournament with name ${'rst2024'}`);
+      console.error(`Could not find tournament with name ${'YABT Test Tourney'}`);
       return;
     }
 
@@ -94,10 +84,10 @@ function App() {
 
   async function chooseMatch() {
     console.log("Choose match");
-    const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "rst2024")!;
+    const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT Test Tourney")!;
 
     if (!myTourney) {
-      console.error(`Could not find tournament with name ${'rst2024'}`);
+      console.error(`Could not find tournament with name ${'YABT Test Tourney'}`);
       return;
     }
 
@@ -112,6 +102,15 @@ function App() {
 
     setSelectableMatches(selectableMatches);
   }
+
+  const handleScoreClick = (player: number, isAddition: boolean) => {
+    const scoreElement = document.getElementById(`Player${player}Score`);
+    if (scoreElement) {
+      const currentScore = parseInt(scoreElement.textContent || "0");
+      const newScore = isAddition ? currentScore +1 : currentScore - 1;
+      scoreElement.textContent = Math.max(0, newScore).toString();
+    }
+  };
 
   React.useEffect(() => {
     const loadTwitchScript = () => {
@@ -247,43 +246,50 @@ function App() {
       <div className="MainClass">
         {/*Top Bar*/}
         <div className="PlayerContainers" id="PlayerContainers">
-          <div className="imageContainer" id="imageContainer">
-            <img src="/images/Placeholder1.png" className="Player1Image" id="Player1Image" />
-            <img src="/images/Placeholder2.png" className="Player2Image" id="Player2Image" />
+          <div className="imageContainer">
+            <img src="/images/Placeholder1.png" className="Player1Image"/>
+            <img src="/images/Placeholder2.png" className="Player2Image"/>
           </div>
-          <div className="StatsContainer">
-            <img src="/images/skillreplay/ReplayBlue.svg" className="Replay ReplayBlue" />
+          <div className="StatsContainer" id="PlayerBounds">
+            <img src="/images/skillreplay/ReplayBlue.svg" className="Replay ReplayBlue" id="Player1ReplayBase" 
+              onClick={(e) => handleButton(0, "replay")}
+              style={{ cursor: "pointer" }}/>
+            <div className="ReplayScore ReplayScore1" id="Player1ReplayScore">0.00%</div>
             {/* Player 1 */}
             <div className="PlayerStats">
               <div className="TopRow1">
-                <span className="FC">2X</span>
-                <span className="Combo">2817x</span>
+                <span className="FC" id="Player1FC">FC</span>
+                <span className="Combo" id="Player1Combo">0x</span>
               </div>
-              <span className="ACC">95.83%</span>
+              <span className="ACC" id="Player1ACC">100%</span>
             </div>
             {/* Player 2 */}
             <div className="PlayerStats">
               <div className="TopRow2">
-                <span className="FC">FC</span>
-                <span className="Combo">2819x</span>
+                <span className="FC" id="Player2FC">FC</span>
+                <span className="Combo" id="Player2Combo">0x</span>
               </div>
-              <span className="ACC">98.51%</span>
+              <span className="ACC" id="Player2ACC">100%</span>
             </div>
-            <img src="/images/skillreplay/ReplayRed.svg" className="Replay ReplayRed"/>
+            <img src="/images/skillreplay/ReplayRed.svg" className="Replay ReplayRed" id="Player2ReplayBase"
+              onClick={(e) => handleButton(1, "replay")}
+              style={{ cursor: "pointer" }}/>
+            <div className="ReplayScore ReplayScore2" id="Player2ReplayScore">0.00%</div>
           </div>
           {/*Song Card*/}
           <div className="SongCard FadeIn" id="SongCard">
             <div className="SongBox">
-              <p className="SongName" id="SongName">Really Long Song name that is...</p>
+              <p className="SongName" id="SongName">Very Very Really Long Song name that is...</p>
               <div className="SongInfoLeft">
-                <p className="SongMapper" id="SongMapper">Mapped by NightHawk</p>
+                <p className="SongMapper" id="SongMapper">Mapped by flitz</p>
                 <p className="UploadDate" id="UploadDate">Uploaded on 2021-09-01</p>
               </div>
-              <div className="SongInfoRight">
+              <div className="SongInfoTop">
                 <p className="SongArtist" id="SongArtist">Lauv</p>
                 <p className="SongLength" id="SongLength">3:59</p>
               </div>
-              <p className="DiffName" id="DiffName">ABC</p>
+              <p className="MapKey" id="MapKey">239ba</p>
+              <p className="SongBPM" id="SongBPM">123bpm</p>
               <div className="SongCover" id="SongCover"></div>
               <div className="SongBoxBG" id="SongBoxBG"></div>
             </div>
@@ -314,10 +320,10 @@ function App() {
                 key={index}
                 id={"MatchSelection"}
                 onClick={() => {
-                  const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "rst2024");
+                  const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT Test Tourney");
   
                   if (!myTourney) {
-                    console.error(`Could not find tournament with name ${'rst2024'}`);
+                    console.error(`Could not find tournament with name ${'YABT Test Tourney'}`);
                     return;
                   }
                   addSelfToMatch(undefined, match.guid);
@@ -345,12 +351,24 @@ function App() {
         {/*Player Names and Score Counter*/ }
         <div className="PlayerScores" id="PlayerScores">
           <div className="Player1Container" id="Player1Container">
-            <p className="Player1Name" id="Player1Name">OK</p>
-            <div className="Player1Score">1</div>
+            
+            <div className="Player1Name" id="Player1Name">This is just A longer name </div>
+            
+            <div className="Player1Score" id="Player1Score"
+            onClick={(e) => handleScoreClick(1, true)}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              handleScoreClick(1, false);
+            }} style={{ cursor: "pointer"}}>0</div>
           </div>
           <div className="Player2Container" id="Player2Container">
-            <p className="Player2Name" id="Player2Name">OK 2</p>
-            <div className="Player2Score">2</div>
+            <p className="Player2Name" id="Player2Name">Wow just Another Name</p>
+            <div className="Player2Score" id="Player2Score"
+            onClick={(e) => handleScoreClick(2, true)}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              handleScoreClick(2, false);
+            }} style={{ cursor: "pointer"}}>0</div>
           </div>
         </div>
       </div>

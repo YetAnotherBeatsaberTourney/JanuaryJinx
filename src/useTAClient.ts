@@ -93,7 +93,7 @@ export const useTAClient = () => {
 
     useEffect(() => {
         const client = new TAClient();
-        client.setAuthToken('eyJhbGciOiJSUzI1NiIsImtpZCI6IjRFOTc0RUE5RTk4RkI5MzJFRUNBOEEyODc0MjBBOThCMjg4M0JEREIiLCJ4NXQiOiJUcGRPcWVtUHVUTHV5b29vZENDcGl5aUR2ZHMiLCJ0eXAiOiJKV1QifQ.eyJpYXQiOiIxNzMyMDMxMDU5IiwiZXhwIjoiMjA0NzU2Mzg1OSIsInRhOmRpc2NvcmRfaWQiOiIxMmE5YzZlOS03OTBjLTQyZjMtYTQxMy1jMGRmZGQ5MWNmNDMiLCJ0YTpkaXNjb3JkX25hbWUiOiJSU1QiLCJ0YTpkaXNjb3JkX2F2YXRhciI6IiIsImlzcyI6InRhX3NlcnZlciIsImF1ZCI6InRhX3VzZXJzIn0.E2Vv1F1JM7-eMazrsEV-k27c3rcdbqzs3TAMmcz5ddGW10eqQUEMngvjVQComYhMMW5UR_dBZZPfpdcQINLkXzm4FhZ9CHx4k-LvXe3ufTwE1yKY7cAnSwwqa5e3S9WBl4CMowJujDIP1ZP7YXLaWCLuw43YRpe-U7ZdUGWIESi1P5m8WrzA2eS3ehLleHPApRyRLpojDqwFZUbKLVNlDQipvKqwR-FUTueNXkgJK8JaVgIDv6B022-4R1GfzIUbIMdYXeYbMRCfYvU_OJK2BR6Hu9oHQVST_DKKXK50X3XsloR45cCkxHI-3gL0b3wORqv_Rlih6NBveEZLu6xf6Q');
+        client.setAuthToken('eyJhbGciOiJSUzI1NiIsImtpZCI6IjlDMTEwNEJDQTlGRjJCQjMzN0I4MjJBMDI1MkU4QjY0RjQ1MUVEQkMiLCJ4NXQiOiJuQkVFdktuX0s3TTN1Q0tnSlM2TFpQUlI3YnciLCJ0eXAiOiJKV1QifQ.eyJpYXQiOiIxNzM2NTMyNTk4IiwiZXhwIjoiMjA1MjA2NTM5OCIsInRhOmRpc2NvcmRfaWQiOiIxMmMxOTEzMy1jYWM3LTRlYTMtYjU1Yi03ZWVlYjZkZmZhM2YiLCJ0YTpkaXNjb3JkX25hbWUiOiJvdmVybGF5IiwidGE6ZGlzY29yZF9hdmF0YXIiOiIiLCJpc3MiOiJ0YV9zZXJ2ZXIiLCJhdWQiOiJ0YV91c2VycyJ9.gc70FGew9bnwaQtlR0ucRogXbQ4SyO_IvW354nvUtLUoAX5WYplhfWY_oY-8yolD4KO8M_7_yQDNMyhx_KGZ66JK0FuBfsn0iCdYjdADTXZhMmsuc8uIQ-W9s0w_Bb66Hgu6rQojoOM5vc7JjZzeNgbxMRnD0i2fxWLWppxSi9q7KgZ0UNwZvS2CLU9cliTBOZdY-YKcb_X5BskhpGHLwz1PvPeS3wGJRCE1vnxvB1TJSZPcYKitkX1oUmWXeyScz1ud0eUiVlPLizE468WkHNBMwcJYEYreVbAvHeDWivgJYNWJqFJiILH16ZUxrEFwm0NOw2MURPbujKjFBiFIdw');
         let isMounted = true;
 
         const setupTAClient = async () => {
@@ -106,10 +106,10 @@ export const useTAClient = () => {
                 }
 
                 const tourneys = client.stateManager.getTournaments();
-                const targetTourney = tourneys.find(x => x.settings?.tournamentName == "rst2024");
+                const targetTourney = tourneys.find(x => x.settings?.tournamentName == "YABT Test Tourney");
 
                 if (!targetTourney) {
-                    console.error(`Could not find tournament with name ${"rst2024"}`);
+                    console.error(`Could not find tournament with name ${"YABT Test Tourney"}`);
                     return;
                 }
 
