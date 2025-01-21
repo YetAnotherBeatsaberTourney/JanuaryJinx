@@ -162,17 +162,17 @@ function handleReplay(player)
 			playerReplay[1].style.opacity = 1;
 			userWinScore(0);
 			playerHadReplay[1] = false;
-			document.getElementById("Player2ReplayScore").textContent = playerReplayScores[1] + "%";
-			document.getElementById("Player1ReplayScore").textContent = playerReplayScores[1] + "%";
-			document.getElementById("Player1ReplayScore").style.opacity = 1;
-			document.getElementById("Player2ReplayScore").style.opacity = 1;
-		} else {
-			playerReplay[1].style.opacity = 0;
-			playerHadReplay[1] = true;
 			document.getElementById("Player1ReplayScore").textContent = "0.00%";
 			document.getElementById("Player2ReplayScore").textContent = "0.00%";
 			document.getElementById("Player1ReplayScore").style.opacity = 0;
 			document.getElementById("Player2ReplayScore").style.opacity = 0;
+		} else {
+			playerReplay[1].style.opacity = 0;
+			playerHadReplay[1] = true;
+			document.getElementById("Player2ReplayScore").textContent = playerReplayScores[1] + "%";
+			document.getElementById("Player1ReplayScore").textContent = playerReplayScores[1] + "%";
+			document.getElementById("Player1ReplayScore").style.opacity = 1;
+			document.getElementById("Player2ReplayScore").style.opacity = 1;
 			if (playerWinScore !== null) {
 				playerWinScore[0] -= 1;
 				if(playerWinScore[0] < 0) playerWinScore[0] = 0;

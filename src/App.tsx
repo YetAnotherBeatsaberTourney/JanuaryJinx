@@ -261,7 +261,7 @@ function App() {
                 <span className="FC" id="Player1FC">FC</span>
                 <span className="Combo" id="Player1Combo">0x</span>
               </div>
-              <span className="ACC" id="Player1ACC">100%</span>
+              <span className="ACC Player1ACC" id="Player1ACC">100%</span>
             </div>
             {/* Player 2 */}
             <div className="PlayerStats">
@@ -269,7 +269,7 @@ function App() {
                 <span className="FC" id="Player2FC">FC</span>
                 <span className="Combo" id="Player2Combo">0x</span>
               </div>
-              <span className="ACC" id="Player2ACC">100%</span>
+              <span className="ACC Player2ACC" id="Player2ACC">100%</span>
             </div>
             <img src="/images/skillreplay/ReplayRed.svg" className="Replay ReplayRed" id="Player2ReplayBase"
               onClick={(e) => handleButton(1, "replay")}
@@ -280,7 +280,7 @@ function App() {
           <div className="SongCard FadeIn" id="SongCard">
             <div className="SongBox">
               <p className="SongName" id="SongName">Very Very Really Long Song name that is...</p>
-              <div className="SongInfoLeft">
+              <div className="SongInfoLeft" id="SongInfoLeft">
                 <p className="SongMapper" id="SongMapper">Mapped by flitz</p>
                 <p className="UploadDate" id="UploadDate">Uploaded on 2021-09-01</p>
               </div>

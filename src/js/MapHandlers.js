@@ -55,15 +55,17 @@ async function getMap(LevelId, LevelDiff) {
 			}
 			setTimeout(function () {
 				document.getElementById("SongCover").style.background = `url('https://eu.cdn.beatsaver.com/${LevelId.toLowerCase()}.jpg') 50% 50% / cover`;
-				document.getElementById("SongCover").style.left = "122px";
+				document.getElementById("SongCover").style.left = "384px";
 				document.getElementById("SongBoxBG").style.background = `url('${diffBorder}') no-repeat center center / contain`;
-				document.getElementById("SongBoxBG").style.left = "0px";
+				document.getElementById("SongBoxBG").style.left = "261px";
+				document.getElementById("SongInfoLeft").style.right = "100px";
+				document.getElementById("SongArtist").style.right = "-16px";
 				document.getElementById("SongCard").style.background = `url('${diffBG}') no-repeat center center / contain`;
 				document.getElementById("SongArtist").innerText = data.metadata.levelAuthorName.replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("SongName").innerText = data.metadata.songName.replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("SongMapper").innerText = data.metadata.songAuthorName.replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("MapKey").innerText = data.id.replaceAll('/n', '').replaceAll('/r', '');
-				document.getElementById("SongBPM").innerText = data.metadata.bpm.replaceAll('/n', '').replaceAll('/r', '') + "bpm";
+				document.getElementById("SongBPM").innerText = data.metadata.bpm;
 				document.getElementById("SongLength").innerText = fancyTimeFormat(data.metadata.duration).replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("UploadDate").innerText = "Uploaded at " + data.uploaded.replaceAll('/n', '').replaceAll('/r', '');
 				setTimeout(function () {
@@ -81,7 +83,6 @@ async function getMap(LevelId, LevelDiff) {
 
 		setTimeout(function () {
 			document.getElementById("DiffBox").style.background = diffColor;
-			document.getElementById("DiffName").innerHTML = diffText;
 			document.getElementById("DiffBox").style.opacity = "1";
 			document.getElementById("PickedBy").style.opacity = "1";
 		}, 1000);
