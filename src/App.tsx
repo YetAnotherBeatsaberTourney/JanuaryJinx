@@ -362,7 +362,7 @@ function App() {
             }} style={{ cursor: "pointer"}}>0</div>
           </div>
           <div className="Player2Container" id="Player2Container">
-            <p className="Player2Name" id="Player2Name">Wow just Another Name</p>
+            <div className="Player2Name" id="Player2Name">Wow just Another Name</div>
             <div className="Player2Score" id="Player2Score"
             onClick={(e) => handleScoreClick(2, true)}
             onContextMenu={(e) => {

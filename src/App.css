@@ -186,9 +186,9 @@ body {
 .chooseMatch {
   padding: 0;
   position: absolute;
-  right: 0;
-  top: 0;
-  height: inherit;
+  right: 62px;
+  top: 8px;
+  height: 8px;
   width: 20%;
   background: transparent;
   border: transparent;
@@ -240,11 +240,12 @@ body {
   background-color: rgb(229, 0, 60);
   margin-right: 4px;
   padding-left: 4px;
-  max-height: 72px;
-  height: 72px;
+  padding-top: 4px;
+  max-height: 94px;
+  height: 94px;
   position: absolute;
   display: grid;
-  bottom: 57px;
+  bottom: 40px;
   margin: 0px;
   border-radius: 16px 0px 0px 16px;
   text-align: center;
@@ -253,28 +254,29 @@ body {
   right: 972px;
   color: white;
   text-transform: capitalize;
-  font-size: 48px;
+  font-size: 50px;
   z-index: 5;
   white-space: nowrap;
   overflow: clip;
   text-overflow: ellipsis;
-  max-width: 18ch;
-  width: 20ch;
+  max-width: 22ch;
+  width: 22ch;
 }
 
 .Player1Score {
   position: absolute;
   display: flex;
-  top: 49px;
+  padding-top: 4px;
+  top: 40px;
   left: 716px;
-  width: 62px;
-  height: 72px; 
+  width: 92px;
+  height: 94px; 
   line-height: 100%;
   background-color: rgb(178, 0, 38);
   align-items: center;
   justify-content: center;
   border-radius: 0px 16px 16px 0px;
-  font-size: 48px;
+  font-size: 50px;
 }
 
 .Player2Container {  
@@ -289,11 +291,12 @@ body {
 .Player2Name {
   background-color: rgb(0, 92, 255);
   padding-left: 4px;
-  height: 72px;
-  max-height: 72px;
+  padding-top: 4px;
+  height: 94px;
+  max-height: 94px;
   position: absolute;
   display: grid;
-  bottom: 57px; 
+  bottom: 42px; 
   text-align: center;
   justify-content: start !important;
   left: 994px;
@@ -302,29 +305,30 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0px;
-  font-size: 48px;
+  font-size: 50px;
   z-index: 5;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 18ch;
-  width: 20ch;
+  max-width: 22ch;
+  width: 22ch;
   border-radius: 0px 16px 16px 0px;
 }
 
 .Player2Score {
   position: absolute;
   display: flex;
-  top: 49px;
-  left: 932px;
-  width: 62px;
-  height: 72px;
+  padding-top: 4px;
+  top: 38px;
+  left: 902px;
+  width: 92px;
+  height: 94px;
   line-height:100%;
   background-color: rgb(0, 53, 170);
   align-items: center;
   justify-content: center;
   border-radius: 16px 0px 0px 16px;
-  font-size: 48px;
+  font-size: 50px;
 }
 
 #player1Video,
@@ -346,6 +350,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 60px;
   padding: 10px 20px;
 }
 
@@ -407,11 +412,11 @@ body {
 }
 
 .ReplayBlue {
-  left: 744.5px;
+  left: 712.5px;
 }
 
 .ReplayRed {
-  left: 1044.5px;
+  left: 1004.5px;
 }
 
 .ReplayScore {
@@ -423,7 +428,7 @@ body {
 }
 
 .ReplayScore1 {
-  left: 596.5px;
+  left: 564.5px;
   padding-left: 2px;
   padding-right: 2px;
   padding-top: 2px;
@@ -433,7 +438,7 @@ body {
 }
 
 .ReplayScore2 {
-  left:1001.5px;
+  left:1064.5px;
   padding-left: 2px;
   padding-right: 2px;
   padding-top: 2px;
@@ -550,18 +555,21 @@ body {
 }
 
 .SongArtist {
-  position: relative;
+  position: absolute;
+  text-align: left;
   top: -6px;
+  right: -200px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 12ch;
+  max-width: 22ch;
+  width: 22ch;
   white-space: nowrap;
 }
 
 .SongLength {
   color: white;
-  position: relative;
-  top: -46px;
+  position: absolute;
+  top: -6px;
   right: -320px;
   overflow: hidden;
   text-overflow: ellipsis;

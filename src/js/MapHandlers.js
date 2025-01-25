@@ -2,7 +2,7 @@ import { fancyTimeFormat } from './FormatHandlers.js';
 export let songData = ["",0];
 
 async function getMap(LevelId, LevelDiff) {
-	let diffText, diffColor, diffBG, diffBorder;
+	let diffText, diffColor, diffBG, diffBorder, diffBorderInv;
 
 	switch (LevelDiff) {
 		case 0:
@@ -10,30 +10,35 @@ async function getMap(LevelId, LevelDiff) {
 			diffColor = "#008055";
 			diffBG = "/images/Songcards/Normal/EasyBG.svg";
 			diffBorder = "/images/Songcards/Normal/Easy.svg";
+			diffBorderInv = "/images/Songcards/Inverted/Easy.svg"
 			break;
 		case 1:
 			diffText = "Normal";
 			diffColor = "#1268A1";
 			diffBG = "/images/Songcards/Normal/NormalBG.svg";
 			diffBorder = "/images/Songcards/Normal/Normal.svg";
+			diffBorderInv = "/images/Songcards/Inverted/Normal.svg"
 			break;
 		case 2:
 			diffText = "Hard";
 			diffColor = "#BD5500";
 			diffBG = "/images/Songcards/Normal/HardBG.svg";
 			diffBorder = "/images/Songcards/Normal/Hard.svg";
+			diffBorderInv = "/images/Songcards/Inverted/Hard.svg"
 			break;
 		case 3:
 			diffText = "Expert";
 			diffColor = "#B52A1C";
 			diffBG = "/images/Songcards/Normal/ExpertBG.svg";
 			diffBorder = "/images/Songcards/Normal/Expert.svg";
+			diffBorderInv = "/images/Songcards/Inverted/Expert.svg"
 			break;
 		case 4:
 			diffText = "Expert+";
 			diffColor = "#454088";
 			diffBG = "/images/Songcards/Normal/Expert+BG.svg";
 			diffBorder = "/images/Songcards/Normal/Expert+.svg";
+			diffBorderInv = "/images/Songcards/Inverted/Expert+.svg"
 			break;
 	}
 	if (songData[0] !== LevelId) {
@@ -59,13 +64,13 @@ async function getMap(LevelId, LevelDiff) {
 				document.getElementById("SongBoxBG").style.background = `url('${diffBorder}') no-repeat center center / contain`;
 				document.getElementById("SongBoxBG").style.left = "261px";
 				document.getElementById("SongInfoLeft").style.right = "100px";
-				document.getElementById("SongArtist").style.right = "-16px";
+				/* document.getElementById("SongArtist").style.right = "-16px"; */
 				document.getElementById("SongCard").style.background = `url('${diffBG}') no-repeat center center / contain`;
 				document.getElementById("SongArtist").innerText = data.metadata.levelAuthorName.replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("SongName").innerText = data.metadata.songName.replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("SongMapper").innerText = data.metadata.songAuthorName.replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("MapKey").innerText = data.id.replaceAll('/n', '').replaceAll('/r', '');
-				document.getElementById("SongBPM").innerText = data.metadata.bpm;
+				document.getElementById("SongBPM").innerText = Math.floor(data.metadata.bpm);
 				document.getElementById("SongLength").innerText = fancyTimeFormat(data.metadata.duration).replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("UploadDate").innerText = "Uploaded at " + data.uploaded.replaceAll('/n', '').replaceAll('/r', '');
 				setTimeout(function () {
