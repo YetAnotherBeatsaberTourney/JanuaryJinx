@@ -201,7 +201,7 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  height: inherit;
+  height: 30px;
   width: 20%;
   background: transparent;
   border: transparent;
