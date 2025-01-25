@@ -123,6 +123,7 @@ body {
   height: 118px;
   border-radius: 12px;
   margin: 0px 34px 0px 34px;
+  opacity: 0;
 }
 
 
@@ -161,6 +162,7 @@ body {
   width: 118px;
   height: 118px;
   border-radius: 12px;
+  opacity: 0;
 }
 
 .buttonsChooseMatch {
