@@ -643,6 +643,15 @@ body {
   flex-shrink: 0;
 }
 
+.InvertedButton {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 116px;
+  width: 116px;
+  opacity: 0;
+}
+
 #Player1SkipBase,
 #Player1ReplayBase,
 #Player2SkipBase,

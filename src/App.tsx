@@ -4,7 +4,7 @@ import './App.css';
 // import all handles
 import { setPlayerInfo } from './js/MainHandlers.js';
 import './js/FormatHandlers.js';
-import { getMap } from './js/MapHandlers.js';
+import { getMap, songData } from './js/MapHandlers.js';
 import { resetAllPlayers, scoreUpdate, userWinScore, handleReplay, playerWinScore } from "./js/UserScoringHandlers";
 
 import { setOverlay } from './js/OverlayHandlers.js';
@@ -240,6 +240,30 @@ function App() {
     };
   }, []);
 
+  function switchInverted(): void {
+    const songBoxBG = document.getElementById("SongBoxBG");
+        
+    if (!songBoxBG) return;
+  
+    const diffToInvertedMap = {
+      0: { normal: "Easy.svg", inverted: "Easy.svg" },
+      1: { normal: "Normal.svg", inverted: "Normal.svg" },
+      2: { normal: "Hard.svg", inverted: "Hard.svg" },
+      3: { normal: "Expert.svg", inverted: "Expert.svg" },
+      4: { normal: "Expert+.svg", inverted: "Expert+.svg" }
+    };
+  
+    const currentDifficulty = songData[1] as keyof typeof diffToInvertedMap;
+    const currentBorder = songBoxBG.style.background;
+    const diffMap = diffToInvertedMap[currentDifficulty];
+  
+    const newBackground = currentBorder.includes("Normal/") 
+      ? `url('/images/Songcards/Inverted/${diffMap.inverted}') no-repeat center center / contain`
+      : `url('/images/Songcards/Normal/${diffMap.normal}') no-repeat center center / contain`;
+  
+    songBoxBG.style.background = newBackground;
+  }
+
   return (
 
     <body className="BGImage">
@@ -291,7 +315,9 @@ function App() {
               <p className="MapKey" id="MapKey">239ba</p>
               <p className="SongBPM" id="SongBPM">123bpm</p>
               <div className="SongCover" id="SongCover"></div>
-              <div className="SongBoxBG" id="SongBoxBG"></div>
+              <div className="SongBoxBG" id="SongBoxBG">
+                <button className="InvertedButton" onClick={(e) => switchInverted()} style={{cursor: "pointer"}}></button>
+              </div>
             </div>
         </div>
       </div>
@@ -351,9 +377,7 @@ function App() {
         {/*Player Names and Score Counter*/ }
         <div className="PlayerScores" id="PlayerScores">
           <div className="Player1Container" id="Player1Container">
-            
             <div className="Player1Name" id="Player1Name">This is just A longer name </div>
-            
             <div className="Player1Score" id="Player1Score"
             onClick={(e) => handleScoreClick(1, true)}
             onContextMenu={(e) => {
