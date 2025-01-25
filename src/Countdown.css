@@ -1,0 +1,13 @@
+.background {
+    height: 1080px;
+    width: 1920px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../public/images/countdownBG.svg");
+}
+
+.countDownClock {
+    font-size: 8rem;
+    color: white;
+}
