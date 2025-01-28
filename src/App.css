@@ -240,9 +240,9 @@ body {
 
 .Player1Name {
   background-color: rgb(229, 0, 60);
-  margin-right: 4px;
-  padding-left: 4px;
-  padding-top: 4px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 5px;
   max-height: 94px;
   height: 94px;
   position: absolute;
@@ -262,7 +262,6 @@ body {
   overflow: clip;
   text-overflow: ellipsis;
   max-width: 22ch;
-  width: 22ch;
 }
 
 .Player1Score {
@@ -292,7 +291,8 @@ body {
 
 .Player2Name {
   background-color: rgb(0, 92, 255);
-  padding-left: 4px;
+  padding-left: 32px;
+  padding-right: 32px;
   padding-top: 4px;
   height: 94px;
   max-height: 94px;
@@ -304,7 +304,6 @@ body {
   left: 994px;
   color: white;
   text-transform: capitalize;
-  justify-content: center;
   align-items: center;
   margin: 0px;
   font-size: 50px;
@@ -313,7 +312,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 22ch;
-  width: 22ch;
   border-radius: 0px 16px 16px 0px;
 }
 
@@ -520,18 +518,26 @@ body {
   width: 380px;
 }
 
-
-
 .SongInfoLeft {
   position: absolute;
-  top: 52px;
-  right: 144px;
+  top: 32px;
+  left: 16px;
   font-size: 18px;
+}
+
+.SongArtist {
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 22ch;
+  width: 22ch;
+  white-space: nowrap;
 }
 
 .SongMapper {
   position: relative;
-  top: -8px;
+  top: -20px;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 24ch;
@@ -540,42 +546,49 @@ body {
 
 .UploadDate {
   position: relative;
-  top: -26px;
+  top: -40px;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 24ch;
   white-space: nowrap;
 }
 
-.SongInfoTop   {
+.SongInfoRight   {
   position: absolute;
-  top: 28px;
-  right: 322px;
-  text-align: right;
-  max-height: 18px;
+  top: 32px;
+  right: 16px;
   font-size: 18px;
-}
-
-.SongArtist {
-  position: absolute;
-  text-align: left;
-  top: -6px;
-  right: -200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 22ch;
-  width: 22ch;
-  white-space: nowrap;
 }
 
 .SongLength {
   color: white;
   position: absolute;
-  top: -6px;
-  right: -320px;
+  right: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 12ch;
+  white-space: nowrap;
+}
+
+.MapKey {
+   font-size: 18px;
+   position: absolute;
+   top: 24px;
+   right: 2px;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   max-width: 6ch;
+   white-space: nowrap;
+ }
+
+.SongBPM {
+  font-size: 18px;
+  position: absolute;
+  top: 46px;
+  right: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 7ch;
   white-space: nowrap;
 }
 
@@ -587,28 +600,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 12ch;
-  white-space: nowrap;
-}
-
-.MapKey {
-  font-size: 18px;
-  position: absolute;
-  top: 44px;
-  right: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 6ch;
-  white-space: nowrap;
-} 
-
-.SongBPM {
-  font-size: 18px;
-  position: absolute;
-  top: 66px;
-  right: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 7ch;
   white-space: nowrap;
 }
 

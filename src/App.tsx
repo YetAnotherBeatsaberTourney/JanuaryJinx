@@ -47,10 +47,10 @@ function App() {
   }
   async function addSelfToMatch(playerName: string | undefined, matchID: string | undefined) {
     console.log("Add self to match");
-    const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT Test Tourney");
+    const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT January Jinx 2025");
 
     if (!myTourney) {
-      console.error(`Could not find tournament with name ${'YABT Test Tourney'}`);
+      console.error(`Could not find tournament with name `);
       return;
     }
 
@@ -84,10 +84,10 @@ function App() {
 
   async function chooseMatch() {
     console.log("Choose match");
-    const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT Test Tourney")!;
+    const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT January Jinx 2025")!;
 
     if (!myTourney) {
-      console.error(`Could not find tournament with name ${'YABT Test Tourney'}`);
+      console.error(`Could not find tournament with name ${'YABT January Jinx 2025'}`);
       return;
     }
 
@@ -242,7 +242,8 @@ function App() {
 
   function switchInverted(): void {
     const songBoxBG = document.getElementById("SongBoxBG");
-        
+    const songCard = document.getElementById("SongCard");
+    
     if (!songBoxBG) return;
   
     const diffToInvertedMap = {
@@ -252,16 +253,33 @@ function App() {
       3: { normal: "Expert.svg", inverted: "Expert.svg" },
       4: { normal: "Expert+.svg", inverted: "Expert+.svg" }
     };
+    
+    const diffToInvertedMapBG = {
+      0: { normal: "EasyBG.svg", inverted: "EasyBG.svg" },
+      1: { normal: "NormalBG.svg", inverted: "NormalBG.svg" },
+      2: { normal: "HardBG.svg", inverted: "HardBG.svg" },
+      3: { normal: "ExpertBG.svg", inverted: "ExpertBG.svg" },
+      4: { normal: "Expert+BG.svg", inverted: "Expert+BG.svg" }
+    }
   
     const currentDifficulty = songData[1] as keyof typeof diffToInvertedMap;
     const currentBorder = songBoxBG.style.background;
     const diffMap = diffToInvertedMap[currentDifficulty];
-  
+    
+    const currentDifficultyBG = songData[1] as keyof typeof diffToInvertedMapBG;
+    const diffMapBG = diffToInvertedMapBG[currentDifficultyBG];
+    
     const newBackground = currentBorder.includes("Normal/") 
       ? `url('/images/Songcards/Inverted/${diffMap.inverted}') no-repeat center center / contain`
       : `url('/images/Songcards/Normal/${diffMap.normal}') no-repeat center center / contain`;
   
+    // songcard bg:
+    const newSCBackground = currentBorder.includes("Normal/")
+    ? `url('/images/Songcards/Inverted/${diffMapBG.inverted}') no-repeat center center / contain`
+    : `url('/images/Songcards/Normal/${diffMapBG.normal}') no-repeat center center / contain`;
+    
     songBoxBG.style.background = newBackground;
+    songCard!.style.background = newSCBackground;
   }
 
   return (
@@ -305,24 +323,25 @@ function App() {
             <div className="SongBox">
               <p className="SongName" id="SongName">Very Very Really Long Song name that is...</p>
               <div className="SongInfoLeft" id="SongInfoLeft">
+                <p className="SongArtist" id="SongArtist">Lauv</p>
                 <p className="SongMapper" id="SongMapper">Mapped by flitz</p>
                 <p className="UploadDate" id="UploadDate">Uploaded on 2021-09-01</p>
               </div>
-              <div className="SongInfoTop">
-                <p className="SongArtist" id="SongArtist">Lauv</p>
+              <div className="SongInfoRight">
                 <p className="SongLength" id="SongLength">3:59</p>
+                <p className="MapKey" id="MapKey">239ba</p>
+                <p className="SongBPM" id="SongBPM">123bpm</p>
               </div>
-              <p className="MapKey" id="MapKey">239ba</p>
-              <p className="SongBPM" id="SongBPM">123bpm</p>
               <div className="SongCover" id="SongCover"></div>
               <div className="SongBoxBG" id="SongBoxBG">
-                <button className="InvertedButton" onClick={(e) => switchInverted()} style={{cursor: "pointer"}}></button>
+                <button className="InvertedButton" onClick={(e) => switchInverted()}
+                        style={{cursor: "pointer"}}></button>
               </div>
             </div>
+          </div>
         </div>
-      </div>
-      {/*Tug of War*/}
-      <div className="TugOfWar FadeIn" id="TugOfWar">
+        {/*Tug of War*/}
+        <div className="TugOfWar FadeIn" id="TugOfWar">
         <div className="LeftTugOuter">
           <div className="LeftTugInner SmoothWidth" id="LeftTug"></div>
         </div>
@@ -346,7 +365,7 @@ function App() {
                 key={index}
                 id={"MatchSelection"}
                 onClick={() => {
-                  const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT Test Tourney");
+                  const myTourney = taHook.taClient.current!.stateManager.getTournaments().find(x => x.settings?.tournamentName === "YABT January Jinx 2025");
   
                   if (!myTourney) {
                     console.error(`Could not find tournament with name ${'YABT Test Tourney'}`);

@@ -106,10 +106,10 @@ export const useTAClient = () => {
                 }
 
                 const tourneys = client.stateManager.getTournaments();
-                const targetTourney = tourneys.find(x => x.settings?.tournamentName == "YABT Test Tourney");
+                const targetTourney = tourneys.find(x => x.settings?.tournamentName == "YABT January Jinx 2025");
 
                 if (!targetTourney) {
-                    console.error(`Could not find tournament with name ${"YABT Test Tourney"}`);
+                    console.error(`Could not find tournament with name ${"YABT January Jinx 2025"}`);
                     return;
                 }
 

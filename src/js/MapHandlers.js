@@ -72,7 +72,8 @@ async function getMap(LevelId, LevelDiff) {
 				document.getElementById("MapKey").innerText = data.id.replaceAll('/n', '').replaceAll('/r', '');
 				document.getElementById("SongBPM").innerText = Math.floor(data.metadata.bpm);
 				document.getElementById("SongLength").innerText = fancyTimeFormat(data.metadata.duration).replaceAll('/n', '').replaceAll('/r', '');
-				document.getElementById("UploadDate").innerText = "Uploaded at " + data.uploaded.replaceAll('/n', '').replaceAll('/r', '');
+				const uploadDate = new Date(data.uploaded).toISOString().split('T')[0];
+				document.getElementById("UploadDate").innerText = "Uploaded at " + uploadDate;
 				setTimeout(function () {
 					document.getElementById("SongCard").style.opacity = "1";
 				}, 500);
