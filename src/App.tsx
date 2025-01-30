@@ -303,7 +303,9 @@ function App() {
                 <span className="FC" id="Player1FC">FC</span>
                 <span className="Combo" id="Player1Combo">0x</span>
               </div>
-              <span className="ACC Player1ACC" id="Player1ACC">100%</span>
+              <span className="ACC Player1ACC" id="Player1ACC"
+                    onClick={(e) => handleButton(3, "replay")}
+                    style={{ cursor: "pointer" }}>100%</span>
             </div>
             {/* Player 2 */}
             <div className="PlayerStats">
@@ -311,7 +313,9 @@ function App() {
                 <span className="FC" id="Player2FC">FC</span>
                 <span className="Combo" id="Player2Combo">0x</span>
               </div>
-              <span className="ACC Player2ACC" id="Player2ACC">100%</span>
+              <span className="ACC Player2ACC" id="Player2ACC"
+                    onClick={(e) => handleButton(3, "replay")}
+                    style={{ cursor: "pointer" }}>100%</span>
             </div>
             <img src="/images/skillreplay/ReplayRed.svg" className="Replay ReplayRed" id="Player2ReplayBase"
               onClick={(e) => handleButton(1, "replay")}

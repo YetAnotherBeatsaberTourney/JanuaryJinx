@@ -35,10 +35,10 @@ function updatePlayerData(index, score, combo, acc, misses) {
 	document.getElementById(`Player${index + 1}ACC`).textContent = playerAcc[index] + "%";
 	document.getElementById(`Player${index + 1}FC`).textContent = playerScore[index];
 
-	if (playerHadReplay[index]) {
+	// if (!playerHadReplay[index]) {
 		playerReplayScores[index] = playerAcc[index];
-		document.getElementById(`Player${index + 1}ReplayScore`).textContent = playerReplayScores[index] + "%";
-	};
+		// document.getElementById(`Player${index + 1}ReplayScore`).textContent = playerReplayScores[index] + "%";
+	// };
 
 	if (misses >= 1) {
 		document.getElementById(`Player${index + 1}FC`).style.color = "#d15252";
@@ -133,23 +133,23 @@ function handleReplay(player)
 	let playerReplay = [null, null];
 	playerReplay[0] = document.getElementById("Player1ReplayBase");
 	playerReplay[1] = document.getElementById("Player2ReplayBase");
+
 	if(player === 0) {
-		if(playerHadReplay[0] === true) {
-			playerReplay[0].style.opacity = 0;
-			userWinScore(1);
-			playerHadReplay[0] = false;
-			document.getElementById("Player1ReplayScore").textContent = playerReplayScores[0] + "%";
-			document.getElementById("Player2ReplayScore").textContent = playerReplayScores[0] + "%";
-			document.getElementById("Player1ReplayScore").style.opacity = 1;
-			document.getElementById("Player2ReplayScore").style.opacity = 1;
-		} else {
+		if(playerHadReplay[0] === false) {
 			playerReplay[0].style.opacity = 1;
+			userWinScore(1);
 			playerHadReplay[0] = true;
-			playerReplayScores[0] = playerAcc[0];
+			// playerReplayScores[0] = playerAcc[0];
 			document.getElementById("Player1ReplayScore").textContent = "0.00%";
 			document.getElementById("Player2ReplayScore").textContent = "0.00%";
-			document.getElementById("Player1ReplayScore").style.opacity = 0;
-			document.getElementById("Player2ReplayScore").style.opacity = 0;
+			document.getElementById("Player1ReplayScore").style.opacity = '0';
+			document.getElementById("Player2ReplayScore").style.opacity = '0';
+
+		} else {
+			playerReplay[0].style.opacity = 0;
+			playerHadReplay[0] = false;
+			document.getElementById("Player1ReplayScore").textContent = playerReplayScores[1] + "%";
+			document.getElementById("Player1ReplayScore").style.opacity = '1';
 			if (playerWinScore !== null) {
 				playerWinScore[1] -= 1;
 				if(playerWinScore[1] < 0) playerWinScore[1] = 0;
@@ -158,21 +158,19 @@ function handleReplay(player)
 		}
 	}
 	else if(player === 1) {
-		if(playerHadReplay[1] === true) {
+		if(playerHadReplay[1] === false) {
 			playerReplay[1].style.opacity = 1;
 			userWinScore(0);
-			playerHadReplay[1] = false;
+			playerHadReplay[1] = true;
 			document.getElementById("Player1ReplayScore").textContent = "0.00%";
 			document.getElementById("Player2ReplayScore").textContent = "0.00%";
-			document.getElementById("Player1ReplayScore").style.opacity = 0;
-			document.getElementById("Player2ReplayScore").style.opacity = 0;
+			document.getElementById("Player1ReplayScore").style.opacity = '0';
+			document.getElementById("Player2ReplayScore").style.opacity = '0';
 		} else {
 			playerReplay[1].style.opacity = 0;
-			playerHadReplay[1] = true;
-			document.getElementById("Player2ReplayScore").textContent = playerReplayScores[1] + "%";
-			document.getElementById("Player1ReplayScore").textContent = playerReplayScores[1] + "%";
-			document.getElementById("Player1ReplayScore").style.opacity = 1;
-			document.getElementById("Player2ReplayScore").style.opacity = 1;
+			playerHadReplay[1] = false;
+			document.getElementById("Player2ReplayScore").textContent = playerReplayScores[0] + "%";
+			document.getElementById("Player2ReplayScore").style.opacity = '1';
 			if (playerWinScore !== null) {
 				playerWinScore[0] -= 1;
 				if(playerWinScore[0] < 0) playerWinScore[0] = 0;
@@ -182,6 +180,8 @@ function handleReplay(player)
 	}
 	else {
 		console.error("Invalid player ID");
+		document.getElementById("Player1ReplayScore").style.opacity = 0;
+		document.getElementById("Player2ReplayScore").style.opacity = 0;
 	}
 }
 

@@ -426,19 +426,20 @@ body {
   padding: 0px;
   line-height: 100%;
 }
-
+/*TODO: PLEASE FIX ALIGNMENT*/
 .ReplayScore1 {
-  left: 564.5px;
+  left: 630px;
   padding-left: 2px;
   padding-right: 2px;
   padding-top: 2px;
   border: 4px solid rgb(0, 83, 229);
   color: rgb(0, 83, 229);
   opacity: 0;
+  align-self: end;
 }
 
 .ReplayScore2 {
-  left:1064.5px;
+  left: 980px;
   padding-left: 2px;
   padding-right: 2px;
   padding-top: 2px;
