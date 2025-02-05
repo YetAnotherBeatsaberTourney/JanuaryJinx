@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
 // import castersView from './castersView';
 import Countdown from './Countdown';
+import Bracket from './bracket';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -17,6 +18,7 @@ root.render(
                 <Route path="/" element={<App />} />
                 {/*<Route path="/casters" element={<castersView />} />*/}
                 <Route path="/countdown" element={<Countdown />} />
+                <Route path="/bracket" element={<Bracket />} />
             </Routes>
         </Router>
     </React.StrictMode>
